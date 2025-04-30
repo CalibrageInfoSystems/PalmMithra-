@@ -222,7 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 autoPlayCurve: Curves.fastOutSlowIn,
                 enableInfiniteScroll: true,
                 slideIndicator: CircularSlideIndicator(
-                  slideIndicatorOptions: SlideIndicatorOptions(
+                  slideIndicatorOptions: const SlideIndicatorOptions(
                     itemSpacing: 10,
                     padding: EdgeInsets.only(bottom: 10.0),
                     indicatorBorderColor: Colors.grey,
@@ -259,16 +259,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           );
         } else if (snapshot.hasError) {
-          /* return Center(
-                          child: Text(
-                              snapshot.error
-                                  .toString()
-                                  .replaceFirst('Exception: ', ''),
-                              style: CommonStyles.txStyF16CpFF6),
-                        ); */
           return const ShimmerWidn();
         }
-        return const ShimmerWidn(); // Placeholder when loading
+        return const ShimmerWidn();
       },
     );
   }

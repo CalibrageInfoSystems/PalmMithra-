@@ -10,6 +10,7 @@ import 'package:akshaya_flutter/gen/assets.gen.dart';
 import 'package:akshaya_flutter/localization/app_locale.dart';
 import 'package:akshaya_flutter/localization/locale_keys.dart';
 import 'package:akshaya_flutter/models/farmer_model.dart';
+import 'package:akshaya_flutter/screens/home_screen/new_home.dart';
 import 'package:akshaya_flutter/screens/profile_screen/profile_screen.dart';
 import 'package:akshaya_flutter/screens/view_requests.dart/requests_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -150,12 +151,13 @@ class _MainScreenPageState extends State<MainScreen> {
     return AppBar(
       elevation: 0,
       scrolledUnderElevation: 0,
-      backgroundColor: const Color(0xFFF8CEBC),
+      backgroundColor: CommonStyles.whiteColor,
+      // backgroundColor: const Color(0xFFF8CEBC),
       leading: Builder(
         builder: (context) => IconButton(
           icon: const Icon(
             Icons.menu,
-            color: CommonStyles.whiteColor,
+            color: CommonStyles.themeTextColor,
           ),
           onPressed: () {
             Scaffold.of(context).openDrawer();
@@ -176,7 +178,10 @@ class _MainScreenPageState extends State<MainScreen> {
           Expanded(
             child: Text(
               tr(LocaleKeys.app_name),
-              style: CommonStyles.txStyF16CwFF6,
+              style: CommonStyles.txStyF20CbFcF5.copyWith(
+                fontWeight: FontWeight.bold,
+                color: CommonStyles.themeTextColor,
+              ),
             ),
           ),
         ],
@@ -309,6 +314,18 @@ class _MainScreenPageState extends State<MainScreen> {
                               onTap: () {
                                 logOutDialog(context);
                               }),
+                          menuOption(
+                              title: 'New Home',
+                              menuIcon: Assets.images.icHome.path,
+                              isPng: true,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const NewHomeScreen(),
+                                  ),
+                                );
+                              }),
                         ],
                       ),
                     ),
@@ -388,7 +405,8 @@ class _MainScreenPageState extends State<MainScreen> {
         return const HomeScreen();
 
       case 1:
-        return const ProfileScreen();
+        return const NewHomeScreen();
+      // return const ProfileScreen();
 
       case 2:
         return const My3fScreen();

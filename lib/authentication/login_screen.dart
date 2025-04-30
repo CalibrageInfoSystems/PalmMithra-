@@ -35,6 +35,12 @@ class _LoginScreenState extends State<LoginScreen> {
   late String _mobileNumber;
 
   @override
+  initState() {
+    super.initState();
+    _farmercodeController.text = "APWGBDAB00010001";
+  }
+
+  @override
   void dispose() {
     _farmercodeController.dispose();
     super.dispose();

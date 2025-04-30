@@ -46,6 +46,11 @@ class CommonStyles {
   static const startColor = Color(0xFF59ca6b);
   static const noteColor = Color(0xFFfff7c9);
 
+  static const homeBgColor = Color.fromARGB(255, 253, 236, 216);
+  static const homeBorderColor = Color.fromARGB(255, 247, 220, 190);
+  static const themeTextColor = Color(0xFFf97316);
+  // static const homeBorderColor = Color.fromARGB(255, 245, 203, 151);
+
   static const blackColor = Colors.black;
   static const dropdownbg = Color(0x8D000000);
   static const primaryColor = Color(0xFAF5F5F5);
@@ -68,6 +73,12 @@ class CommonStyles {
     fontWeight: FontWeight.w600,
     color: blackColor,
   );
+
+  static const txStyF20CbFcF5 = TextStyle(
+      fontSize: 20,
+      fontWeight: FontWeight.w500,
+      fontFamily: 'Calibri',
+      color: CommonStyles.blackColor);
 
   static const txStyF12CpFF6 = TextStyle(
     fontSize: 12,

@@ -60,7 +60,7 @@ dependencies:
   share_plus: ^10.0.2
   shared_preferences: ^2.2.2
   shimmer: ^3.0.0
-  skeletonizer: ^1.4.2
+  skeletonizer: ^1.4.3
   syncfusion_flutter_pdfviewer: ^27.1.58
   timezone: ^0.10.0
   toastification: ^2.3.0
