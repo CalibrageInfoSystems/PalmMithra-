@@ -99,7 +99,7 @@ class _SplashScreenState extends State<SplashScreen>
             children: [
               // Background Image
               Image.asset(
-                'assets/images/landingpagebackground.png',
+                'assets/images/palmmitra_splash.png',
                 width: double.infinity,
                 height: double.infinity,
                 fit: BoxFit.cover,

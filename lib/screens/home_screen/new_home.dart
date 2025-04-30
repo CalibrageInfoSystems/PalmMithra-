@@ -23,6 +23,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
+import 'package:marquee/marquee.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:skeletonizer/skeletonizer.dart';
@@ -171,7 +172,13 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                     children: [
                       header(isTablet),
                       const SizedBox(height: 12),
+                      SizedBox(
+                        // height: remainingHeight * 0.03,
+                        height: isTablet ? 50 : 40,
+                        child: marqueeText(),
+                      ),
                       banners(size),
+
                       const SizedBox(height: 12),
                       sectionTemplate(tr(LocaleKeys.view)),
                       const SizedBox(height: 6),
@@ -597,7 +604,75 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
     }
   }
 
-  Widget customLayout(
+
+  IconData getIconForTitle(String? title) {
+    switch (title?.toLowerCase()) {
+      case 'leads':
+        return Icons.person_add_alt_1;
+      case 'attendance':
+        return Icons.calendar_today;
+      case 'reports':
+        return Icons.bar_chart;
+      case 'settings':
+        return Icons.settings;
+      case 'logout':
+        return Icons.logout;
+      default:
+        return Icons.help_outline;
+    }
+  }
+
+  Widget customLayout({
+    String? title,
+    String? assetName,
+    void Function()? onTap,
+    required Size size,
+    EdgeInsetsGeometry? padding,
+  }) {
+    final isTablet = size.width > 600;
+
+    return Expanded(
+      child: GestureDetector(
+        onTap: onTap,
+        child: Container(
+          padding: padding ??
+              EdgeInsets.symmetric(vertical: isTablet ? 20 : 16, horizontal: 5),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: CommonStyles.homeBorderColor),
+            color: Colors.white,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: EdgeInsets.all(isTablet ? 20 : 16),
+                decoration: BoxDecoration(
+                  color: CommonStyles.homeBgColor,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  getIconForTitle(title),
+                  color: CommonStyles.themeTextColor,
+                  size: isTablet ? 40 : 30,
+                ),
+              ),
+              const SizedBox(height: 5),
+              Text(
+                title ?? '',
+                textAlign: TextAlign.center,
+                style: CommonStyles.txStyF14CbFF6.copyWith(
+                  fontSize: isTablet ? 16 : 14,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+/*  Widget customLayout(
       {String? title,
       String? assetName,
       void Function()? onTap,
@@ -628,13 +703,13 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                   shape: BoxShape.circle,
                 ),
                 child:
-                    /* SvgPicture.asset(
+                    *//* SvgPicture.asset(
                         assetName,
                         color: iconColor,
                         fit: BoxFit.cover,
                         width: isTablet ? 40 : 30,
                         height: isTablet ? 40 : 30,
-                      ), */
+                      ), *//*
 
                     Icon(
                   Icons.check_circle_outline,
@@ -655,7 +730,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
         ),
       ),
     );
-  }
+  }*/
 
   void navigateToSelectedServiceScreen(int serviceTypeId) {
     switch (serviceTypeId) {
@@ -824,6 +899,25 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
           index: (index + 1),
         ),
       ),
+    );
+  }
+
+  Widget marqueeText() {
+    return FutureBuilder(
+      future: bannersAndMarqueeTextData,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final marquee = snapshot.data as List<BannerModel>;
+          return Marquee(
+            text:
+            "${marquee[0].description!}                                        ${marquee[0].description!}                                        ",
+            style: CommonStyles.txStyF12CbFF6,
+          );
+        } else if (snapshot.hasError) {
+          return const ShimmerWidn();
+        }
+        return const ShimmerWidn();
+      },
     );
   }
 }
