@@ -58,6 +58,10 @@ class $AssetsImagesGen {
   SvgGenImage get equipmentAsset =>
       const SvgGenImage('assets/images/equipment_asset.svg');
 
+  /// File path: assets/images/farmer_app_login.jpg
+  AssetGenImage get farmerAppLogin =>
+      const AssetGenImage('assets/images/farmer_app_login.jpg');
+
   /// File path: assets/images/fertilizer_asset.svg
   SvgGenImage get fertilizerAsset =>
       const SvgGenImage('assets/images/fertilizer_asset.svg');
@@ -294,6 +298,7 @@ class $AssetsImagesGen {
         edibleOilAsset,
         equipment,
         equipmentAsset,
+        farmerAppLogin,
         fertilizerAsset,
         fertilizers,
         fertilizers1,

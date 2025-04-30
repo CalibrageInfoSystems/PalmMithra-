@@ -49,6 +49,7 @@ class CommonStyles {
   static const homeBgColor = Color.fromARGB(255, 253, 236, 216);
   static const homeBorderColor = Color.fromARGB(255, 247, 220, 190);
   static const themeTextColor = Color(0xFFf97316);
+  static const loginBtnColor = Color(0xFFf15f22);
   // static const homeBorderColor = Color.fromARGB(255, 245, 203, 151);
 
   static const blackColor = Colors.black;

@@ -4,30 +4,29 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:akshaya_flutter/authentication/login_otp_screen.dart';
-import 'package:akshaya_flutter/authentication/xxx.dart';
 import 'package:akshaya_flutter/common_utils/api_config.dart';
 import 'package:akshaya_flutter/common_utils/common_styles.dart';
+import 'package:akshaya_flutter/gen/assets.gen.dart';
 import 'package:akshaya_flutter/localization/locale_keys.dart';
 import 'package:akshaya_flutter/models/FarmerResponseModel.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 // import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:qrscan/qrscan.dart' as scanner;
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class Xxx extends StatefulWidget {
+  const Xxx({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<Xxx> createState() => _XxxState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _XxxState extends State<Xxx> {
   final TextEditingController _farmercodeController = TextEditingController();
   String farmercode = "";
 
@@ -69,77 +68,84 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Stack(
                 children: [
                   Image.asset(
-                    'assets/images/appbg.png',
+                    Assets.images.farmerAppLogin.path,
+                    // 'assets/images/farmer_app_login.jpg',
                     width: double.infinity,
                     height: double.infinity,
                     fit: BoxFit.cover,
                   ),
-                  Container(
+                  /*  Container(
                     color: const Color(0x8D000000),
-                  ),
+                  ), */
                   Padding(
-                    padding: const EdgeInsets.only(top: 180.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Align(
                           alignment: Alignment.topCenter,
-                          child: Image.asset(
-                            'assets/images/ic_user.png',
-                            width: 200,
-                            height: 150,
-                          ),
-                        ),
-                        Text(tr(LocaleKeys.welcome),
-                            style: CommonStyles.txSty_24w),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 22.0, left: 22.0, right: 22.0),
-                          child: TextFormField(
-                            controller: _farmercodeController,
-                            decoration: InputDecoration(
-                              // hintText: tr(LocaleKeys.farmar_id),
-                              hintText: 'Enter Grower Id',
-
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Colors.white,
-                                ),
-                                borderRadius: BorderRadius.circular(
-                                    10.0), // Set the border radius
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Colors
-                                      .white, // Set the border line color to white
-                                ),
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              hintStyle: CommonStyles.txStyF20CwFF6.copyWith(
-                                color: Colors.grey.shade500,
-                              ),
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 15, horizontal: 15),
-                              alignLabelWithHint:
-                                  true, // Center-align the hint text
-                            ),
-                            textAlign: TextAlign.center,
-
+                          child: Text(
+                            'PALM MITRA',
                             style: CommonStyles.txStyF20CwFF6.copyWith(
-                              // decoration: TextDecoration.underline,
-                              decorationColor: Colors.white,
+                              fontSize: 30,
+                              color: CommonStyles.loginBtnColor,
+                              fontWeight: FontWeight.bold,
                             ),
-                            textCapitalization: TextCapitalization
-                                .characters, // Automatically enables CAPS lock
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(RegExp(
-                                  r'[A-Z0-9]')), // Allows only uppercase letters and numbers
-                            ],
                           ),
+                          // Image.asset(
+                          //   Assets.images.palm360Logo.path,
+                          // ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 22.0, left: 22.0, right: 22.0),
+                        const SizedBox(height: 30),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              " Grower Id",
+                              style: TextStyle(
+                                  color: CommonStyles.loginBtnColor,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                        TextFormField(
+                          controller: _farmercodeController,
+                          decoration: InputDecoration(
+                            hintText: tr(LocaleKeys.farmar_id),
+                            filled: true,
+                            fillColor: CommonStyles.whiteColor,
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                color: CommonStyles.themeTextColor,
+                              ),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                color: CommonStyles.themeTextColor,
+                              ),
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            hintStyle: CommonStyles.txStyF20CwFF6.copyWith(
+                              color: Colors.grey.shade500,
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 15),
+                            alignLabelWithHint: true,
+                          ),
+                          // textAlign: TextAlign.center,
+                          style: CommonStyles.txStyF20CwFF6.copyWith(
+                            color: Colors.black,
+                          ),
+                          textCapitalization: TextCapitalization.characters,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp(r'[A-Z0-9]')),
+                          ],
+                        ),
+                        /* Padding(
+                          padding: const EdgeInsets.only(top: 22.0),
                           child: SizedBox(
                             width: double.infinity,
                             // Makes the button take up the full width of its parent
@@ -191,8 +197,33 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),
+                        ), */
+                        const SizedBox(
+                          height: 30,
                         ),
-                        Padding(
+                        ElevatedButton(
+                          onPressed: () async {
+                            FocusScope.of(context).unfocus();
+                            bool validationSuccess = await isvalidations();
+                            if (validationSuccess) {
+                              onLoginPressed();
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: CommonStyles.loginBtnColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            padding: EdgeInsets.symmetric(vertical: 15),
+                            minimumSize: Size(double.infinity, 0),
+                          ),
+                          child: Text(
+                            tr(LocaleKeys.login),
+                            style: TextStyle(fontSize: 18, color: Colors.white),
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        /* Padding(
                           padding: const EdgeInsets.only(top: 6.0),
                           child: Container(
                             alignment: AlignmentDirectional.center,
@@ -204,11 +235,28 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                           ),
+                        ), */
+                        Row(
+                          children: [
+                            Expanded(
+                                child:
+                                    Divider(color: Colors.grey, thickness: 1)),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 10),
+                              child: Text(
+                                'OR',
+                                style:
+                                    TextStyle(color: Colors.grey, fontSize: 16),
+                              ),
+                            ),
+                            Expanded(
+                                child:
+                                    Divider(color: Colors.grey, thickness: 1)),
+                          ],
                         ),
-
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 10.0, left: 22.0, right: 22.0),
+                        SizedBox(height: 20),
+                        /* Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
                           child: SizedBox(
                             width: double.infinity,
                             // Makes the button take up the full width of its parent
@@ -234,14 +282,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               child: ElevatedButton(
                                 onPressed: () {
-                                  /*  print('scan btn clicked');
-                                  _scanQR(); */
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Xxx(),
-                                    ),
-                                  );
+                                  print('scan btn clicked');
+                                  _scanQR();
                                 },
                                 style: ElevatedButton.styleFrom(
                                   padding:
@@ -263,7 +305,31 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        // Other Buttons
+                         */
+
+                        ElevatedButton(
+                          onPressed: _scanQR,
+                          /* style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF4CAF50),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            padding: EdgeInsets.symmetric(vertical: 15),
+                            minimumSize: Size(double.infinity, 0),
+                          ), */
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: CommonStyles.loginBtnColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            padding: EdgeInsets.symmetric(vertical: 15),
+                            minimumSize: Size(double.infinity, 0),
+                          ),
+                          child: Text(
+                            tr(LocaleKeys.scan_qr),
+                            style: TextStyle(fontSize: 18, color: Colors.white),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -365,55 +431,6 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  // Future<void> _scanQR() async {
-  //   try {
-  //     var status = await Permission.camera.request();
-  //     print('qrscan: status $status');
-
-  //     if (status.isGranted) {
-  //       String? cameraScanResult = await scanner.scan();
-  //       setState(() {
-  //         print('qrscan: cameraScanResult $cameraScanResult');
-  //         if (cameraScanResult != null) {
-  //           _farmercodeController.text = cameraScanResult;
-  //         }
-  //       });
-  //     } else if (status == PermissionStatus.permanentlyDenied ||
-  //         status == PermissionStatus.denied) {
-  //       openAppSettings();
-  //     } else {
-  //       print('Camera permission is required.');
-  //       CommonStyles.showCustomDialog(
-  //           context, 'Camera permission is required.');
-  //     }
-  //   } catch (e) {
-  //     print('qrscan: e $e');
-  //   }
-  // }
-
-  // Future<void> _scanQR() async {
-  //   // Request camera permission
-  //   var status = await Permission.camera.isGranted;
-  //   print('status: $status');
-  //   if (status) {
-  //     try {
-  //       String? cameraScanResult = await scanner.scan();
-  //       setState(() {
-  //         if (cameraScanResult != null) {
-  //           _farmercodeController.text = cameraScanResult;
-  //         }
-  //       });
-  //     } on PlatformException catch (e) {
-  //       print(e);
-  //     }
-  //   } else {
-  //     // Handle permission denied
-  //     setState(() {
-  //       _farmercodeController.text = "Camera permission denied";
-  //     });
-  //   }
-  // }
-
   Future<bool> isvalidations() async {
     bool isValid = true;
 
@@ -422,7 +439,7 @@ class _LoginScreenState extends State<LoginScreen> {
       isValid = false;
     }
 
-    return isValid; // Return true if validation is successful, false otherwise
+    return isValid;
   }
 
   void _showErrorDialog(String message) {
