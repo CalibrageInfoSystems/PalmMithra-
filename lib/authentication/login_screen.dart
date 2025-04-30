@@ -48,6 +48,98 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+  final size = MediaQuery.of(context).size;
+
+  return Scaffold(
+  body: Stack(
+  children: [
+  // Background Image (bottom farm field)
+  Positioned.fill(
+  child: Image.asset(
+    'assets/images/farmer_app_login.jpg',
+  fit: BoxFit.cover,
+  ),
+  ),
+
+
+  // Main Content
+  Center(
+  child: SingleChildScrollView(
+  padding: const EdgeInsets.symmetric(horizontal: 24),
+  child: Column(
+  mainAxisSize: MainAxisSize.min,
+  children: [
+  // Title
+  const Text(
+  "Palm Mithra",
+  style: TextStyle(
+  fontSize: 24,
+  fontWeight: FontWeight.bold,
+  ),
+  ),
+
+
+  const SizedBox(height: 24),
+
+  // Username Field
+  const Align(
+  alignment: Alignment.centerLeft,
+  child: Text(
+  "Grower Id",
+  style: TextStyle(fontWeight: FontWeight.bold),
+  ),
+  ),
+  const SizedBox(height: 8),
+  const TextField(
+  decoration: InputDecoration(
+  border: OutlineInputBorder(),
+  hintText: 'Enter Grower Id',
+  ),
+  controller: null, // Add your controller here
+  ),
+
+  const SizedBox(height: 16),
+
+
+
+  const SizedBox(height: 24),
+
+  // Sign In Button
+  SizedBox(
+  width: double.infinity,
+  height: 45,
+  child: ElevatedButton(
+  style: ElevatedButton.styleFrom(
+  backgroundColor: Colors.orange,
+  shape: RoundedRectangleBorder(
+  borderRadius: BorderRadius.circular(6),
+  ),
+  ),
+  onPressed: () {
+  // TODO: Implement login logic
+  },
+  child: const Text(
+  "SIGN IN",
+  style: TextStyle(color: Colors.white),
+  ),
+  ),
+  ),
+  ],
+  ),
+  ),
+  ),
+
+
+
+  ],
+  ),
+  );
+  }
+
+/*
+
+  @override
+  Widget build(BuildContext context) {
     return WillPopScope(
         onWillPop: () async {
           if (Platform.isAndroid) {
@@ -68,7 +160,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Stack(
                 children: [
                   Image.asset(
-                    'assets/images/appbg.png',
+                    'assets/images/farmer_app_login.jpg',
                     width: double.infinity,
                     height: double.infinity,
                     fit: BoxFit.cover,
@@ -81,16 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Align(
-                          alignment: Alignment.topCenter,
-                          child: Image.asset(
-                            'assets/images/ic_user.png',
-                            width: 200,
-                            height: 150,
-                          ),
-                        ),
-                        Text(tr(LocaleKeys.welcome),
-                            style: CommonStyles.txSty_24w),
+
                         Padding(
                           padding: const EdgeInsets.only(
                               top: 22.0, left: 22.0, right: 22.0),
@@ -265,6 +348,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ));
   }
+*/
 
   Future<void> onLoginPressed() async {
     String farmerIdText = _farmercodeController.text.trim();
