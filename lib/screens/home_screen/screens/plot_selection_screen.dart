@@ -59,7 +59,7 @@ class _PlotSelectionScreenState extends State<PlotSelectionScreen> {
               .map((item) => PlotDetailsModel.fromJson(item))
               .toList();
         }
-        throw Exception('list is empty');
+        throw Exception( tr(LocaleKeys.no_plots));
       } else {
         throw Exception(
             'Request failed with status: ${jsonResponse.statusCode}');

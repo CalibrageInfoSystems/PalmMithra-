@@ -51,8 +51,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
       final jsonResponse = await http.get(Uri.parse(apiUrl));
       if (jsonResponse.statusCode == 200) {
         final response = jsonDecode(jsonResponse.body);
-        List<dynamic> plotList = response['listResult'];
-        return plotList.map((item) => PlotDetailsModel.fromJson(item)).toList();
+
+        if (response['listResult'] != null) {
+          List<dynamic> plotList = response['listResult'];
+        return plotList.map((item) => PlotDetailsModel.fromJson(item)).toList();}
+        else{
+          throw Exception( tr(LocaleKeys.no_plots));
+
+        }
       } else {
         throw Exception(
             'Request failed with status: ${jsonResponse.statusCode}');
@@ -61,6 +67,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
       rethrow;
     }
   }
+/*
+  Future<List<PlotDetailsModel>> getPlotDetails() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? userId = prefs.getString(SharedPrefsKeys.farmerCode);
+    final apiUrl = '$baseUrl$getActivePlotsByFarmerCode$userId';
+
+    try {
+      final jsonResponse = await http.get(Uri.parse(apiUrl));
+      print('getPlotDetails: $apiUrl');
+
+      if (jsonResponse.statusCode == 200) {
+        final response = jsonDecode(jsonResponse.body);
+        if (response['listResult'] != null) {
+          List<dynamic> plotList = response['listResult'];
+
+          // Map and filter based on the validation method
+          List<PlotDetailsModel> plots =
+          plotList.map((item) => PlotDetailsModel.fromJson(item)).toList();
+
+
+          */
+/* Future.delayed(const Duration(seconds: 3), () {
+              if (mounted) {
+                Navigator.of(context).pop(); // Close the dialog
+                Navigator.of(context).pop(); // Navigate back from the screen
+              }
+            }); *//*
+
+
+        } else {
+          throw Exception('List is empty');
+        }
+      } else {
+        throw Exception(
+            'Request failed with status: ${jsonResponse.statusCode}');
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+*/
 
   Future<FarmerModel> getFarmerInfoFromSharedPrefs() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();

@@ -154,7 +154,7 @@ class _PlotSelectionScreenState extends State<PlotSelection> {
                 'Yeilding Plots are not Available'); // No plots meet the yelding criteria
           }
         } else {
-          throw Exception('List is empty');
+          throw Exception( tr(LocaleKeys.no_plots));
         }
       } else {
         throw Exception(

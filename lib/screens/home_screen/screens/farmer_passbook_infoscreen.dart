@@ -1206,7 +1206,7 @@ class _FarmerPassbookTabViewState extends State<FarmerPassbookTabView> {
 
     Directory? directoryPath;
     String timestamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
-    String fileName = "3FAkshaya_ledger_$timestamp.xlsx";
+    String fileName = "PalmMithra_ledger_$timestamp.xlsx";
     String filePath;
 
     if (Platform.isAndroid) {
@@ -1226,12 +1226,13 @@ class _FarmerPassbookTabViewState extends State<FarmerPassbookTabView> {
       return;
     }
 
-    Directory appDirectory = Directory('${directoryPath?.path}/3FAkshaya');
+    Directory appDirectory = Directory('${directoryPath?.path}/PalmMithra');
     if (!await appDirectory.exists()) {
       await appDirectory.create(recursive: true);
     }
 
     filePath = '${appDirectory.path}/$fileName';
+    print('filePath=======$filePath');
     final File file = File(filePath);
     await file.create(recursive: true);
     await file.writeAsBytes(excelBytes);
