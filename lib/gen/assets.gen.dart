@@ -25,6 +25,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/bill.svg
   SvgGenImage get bill => const SvgGenImage('assets/images/bill.svg');
 
+  /// File path: assets/images/bio_lab_asset.svg
+  SvgGenImage get bioLabAsset =>
+      const SvgGenImage('assets/images/bio_lab_asset.svg');
+
   /// File path: assets/images/cancel.png
   AssetGenImage get cancel => const AssetGenImage('assets/images/cancel.png');
 
@@ -42,13 +46,21 @@ class $AssetsImagesGen {
   AssetGenImage get ediableoils =>
       const AssetGenImage('assets/images/ediableoils.png');
 
+  /// File path: assets/images/edible_oil_asset.svg
+  SvgGenImage get edibleOilAsset =>
+      const SvgGenImage('assets/images/edible_oil_asset.svg');
+
   /// File path: assets/images/equipment.png
   AssetGenImage get equipment =>
       const AssetGenImage('assets/images/equipment.png');
 
-  /// File path: assets/images/farmer_app_login.jpg
-  AssetGenImage get farmerAppLogin =>
-      const AssetGenImage('assets/images/farmer_app_login.jpg');
+  /// File path: assets/images/equipment_asset.svg
+  SvgGenImage get equipmentAsset =>
+      const SvgGenImage('assets/images/equipment_asset.svg');
+
+  /// File path: assets/images/fertilizer_asset.svg
+  SvgGenImage get fertilizerAsset =>
+      const SvgGenImage('assets/images/fertilizer_asset.svg');
 
   /// File path: assets/images/fertilizers.png
   AssetGenImage get fertilizers =>
@@ -68,6 +80,14 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/general.png
   AssetGenImage get general => const AssetGenImage('assets/images/general.png');
+
+  /// File path: assets/images/general_asset copy.svg
+  SvgGenImage get generalAssetCopy =>
+      const SvgGenImage('assets/images/general_asset copy.svg');
+
+  /// File path: assets/images/general_asset.svg
+  SvgGenImage get generalAsset =>
+      const SvgGenImage('assets/images/general_asset.svg');
 
   /// File path: assets/images/harvesting.png
   AssetGenImage get harvesting =>
@@ -172,12 +192,20 @@ class $AssetsImagesGen {
   /// File path: assets/images/labour.png
   AssetGenImage get labour => const AssetGenImage('assets/images/labour.png');
 
+  /// File path: assets/images/labour_asset.svg
+  SvgGenImage get labourAsset =>
+      const SvgGenImage('assets/images/labour_asset.svg');
+
   /// File path: assets/images/landingpagebackground.png
   AssetGenImage get landingpagebackground =>
       const AssetGenImage('assets/images/landingpagebackground.png');
 
   /// File path: assets/images/loan.png
   AssetGenImage get loan => const AssetGenImage('assets/images/loan.png');
+
+  /// File path: assets/images/loan_asset.svg
+  SvgGenImage get loanAsset =>
+      const SvgGenImage('assets/images/loan_asset.svg');
 
   /// File path: assets/images/logo_final.png
   AssetGenImage get logoFinal =>
@@ -194,6 +222,14 @@ class $AssetsImagesGen {
   /// File path: assets/images/nurseries_icon.png
   AssetGenImage get nurseriesIcon =>
       const AssetGenImage('assets/images/nurseries_icon.png');
+
+  /// File path: assets/images/oil_plam_asset copy.svg
+  SvgGenImage get oilPlamAssetCopy =>
+      const SvgGenImage('assets/images/oil_plam_asset copy.svg');
+
+  /// File path: assets/images/oil_plam_asset.svg
+  SvgGenImage get oilPlamAsset =>
+      const SvgGenImage('assets/images/oil_plam_asset.svg');
 
   /// File path: assets/images/oilpalm.png
   AssetGenImage get oilpalm => const AssetGenImage('assets/images/oilpalm.png');
@@ -213,6 +249,14 @@ class $AssetsImagesGen {
   /// File path: assets/images/pest.png
   AssetGenImage get pest => const AssetGenImage('assets/images/pest.png');
 
+  /// File path: assets/images/pestanddiseases_asset copy.svg
+  SvgGenImage get pestanddiseasesAssetCopy =>
+      const SvgGenImage('assets/images/pestanddiseases_asset copy.svg');
+
+  /// File path: assets/images/pestanddiseases_asset.svg
+  SvgGenImage get pestanddiseasesAsset =>
+      const SvgGenImage('assets/images/pestanddiseases_asset.svg');
+
   /// File path: assets/images/progress-complete.svg
   SvgGenImage get progressComplete =>
       const SvgGenImage('assets/images/progress-complete.svg');
@@ -225,81 +269,99 @@ class $AssetsImagesGen {
   AssetGenImage get quickPay =>
       const AssetGenImage('assets/images/quick_pay.png');
 
+  /// File path: assets/images/quick_pay_asset.svg
+  SvgGenImage get quickPayAsset =>
+      const SvgGenImage('assets/images/quick_pay_asset.svg');
+
   /// File path: assets/images/visit.png
   AssetGenImage get visit => const AssetGenImage('assets/images/visit.png');
 
+  /// File path: assets/images/visit_asset.svg
+  SvgGenImage get visitAsset =>
+      const SvgGenImage('assets/images/visit_asset.svg');
+
   /// List of all assets
   List<dynamic> get values => [
-    appbg,
-    arrowDown,
-    bill,
-    cancel,
-    cart,
-    cropmain,
-    delivery,
-    ediableoils,
-    equipment,
-    farmerAppLogin,
-    fertilizers,
-    fertilizers1,
-    ffbCollection,
-    ffbcollection,
-    general,
-    harvesting,
-    homeIcon,
-    homeIcon2,
-    icAdd,
-    icBankWhite,
-    icCalender,
-    icCare,
-    icCollectionList,
-    icGodown,
-    icHome,
-    icImpContacts,
-    icLang,
-    icLeft,
-    icLernin,
-    icLogo,
-    icLogout,
-    icMapList,
-    icMicrophone,
-    icMillList,
-    icMyPng,
-    icMySvg,
-    icMyprofile,
-    icPause,
-    icPdf,
-    icPlay,
-    icRequest,
-    icUser,
-    infoIcon,
-    labour,
-    landingpagebackground,
-    loan,
-    logoFinal,
-    mainVisit,
-    noproductImage,
-    nurseriesIcon,
-    oilpalm,
-    palm360Logo,
-    palmmitraSplash,
-    passbook,
-    pest,
-    progressComplete,
-    progressComplete2,
-    quickPay,
-    visit
-  ];
+        appbg,
+        arrowDown,
+        bill,
+        bioLabAsset,
+        cancel,
+        cart,
+        cropmain,
+        delivery,
+        ediableoils,
+        edibleOilAsset,
+        equipment,
+        equipmentAsset,
+        fertilizerAsset,
+        fertilizers,
+        fertilizers1,
+        ffbCollection,
+        ffbcollection,
+        general,
+        generalAssetCopy,
+        generalAsset,
+        harvesting,
+        homeIcon,
+        homeIcon2,
+        icAdd,
+        icBankWhite,
+        icCalender,
+        icCare,
+        icCollectionList,
+        icGodown,
+        icHome,
+        icImpContacts,
+        icLang,
+        icLeft,
+        icLernin,
+        icLogo,
+        icLogout,
+        icMapList,
+        icMicrophone,
+        icMillList,
+        icMyPng,
+        icMySvg,
+        icMyprofile,
+        icPause,
+        icPdf,
+        icPlay,
+        icRequest,
+        icUser,
+        infoIcon,
+        labour,
+        labourAsset,
+        landingpagebackground,
+        loan,
+        loanAsset,
+        logoFinal,
+        mainVisit,
+        noproductImage,
+        nurseriesIcon,
+        oilPlamAssetCopy,
+        oilPlamAsset,
+        oilpalm,
+        palm360Logo,
+        palmmitraSplash,
+        passbook,
+        pest,
+        pestanddiseasesAssetCopy,
+        pestanddiseasesAsset,
+        progressComplete,
+        progressComplete2,
+        quickPay,
+        quickPayAsset,
+        visit,
+        visitAsset
+      ];
 }
 
 class $AssetsTranslationsGen {
   const $AssetsTranslationsGen();
 
   /// File path: assets/translations/en-UK.json
-  String get enUKJson => 'assets/translations/en-UK.json';
-
-  /// File path: assets/translations/en-UK.json~
-  String get enUKJson_ => 'assets/translations/en-UK.json~';
+  String get enUK => 'assets/translations/en-UK.json';
 
   /// File path: assets/translations/kn-IN.json
   String get knIN => 'assets/translations/kn-IN.json';
@@ -308,7 +370,7 @@ class $AssetsTranslationsGen {
   String get teIN => 'assets/translations/te-IN.json';
 
   /// List of all assets
-  List<String> get values => [enUKJson, enUKJson_, knIN, teIN];
+  List<String> get values => [enUK, knIN, teIN];
 }
 
 class Assets {
@@ -320,10 +382,10 @@ class Assets {
 
 class AssetGenImage {
   const AssetGenImage(
-      this._assetName, {
-        this.size,
-        this.flavors = const {},
-      });
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  });
 
   final String _assetName;
 
@@ -401,16 +463,16 @@ class AssetGenImage {
 
 class SvgGenImage {
   const SvgGenImage(
-      this._assetName, {
-        this.size,
-        this.flavors = const {},
-      }) : _isVecFormat = false;
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  }) : _isVecFormat = false;
 
   const SvgGenImage.vec(
-      this._assetName, {
-        this.size,
-        this.flavors = const {},
-      }) : _isVecFormat = true;
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  }) : _isVecFormat = true;
 
   final String _assetName;
   final Size? size;
