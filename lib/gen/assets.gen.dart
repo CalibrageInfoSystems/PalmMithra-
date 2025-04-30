@@ -22,11 +22,21 @@ class $AssetsImagesGen {
   AssetGenImage get arrowDown =>
       const AssetGenImage('assets/images/arrow_down.png');
 
+  /// File path: assets/images/bill.svg
+  SvgGenImage get bill => const SvgGenImage('assets/images/bill.svg');
+
+  /// File path: assets/images/bio_lab_asset.svg
+  SvgGenImage get bioLabAsset =>
+      const SvgGenImage('assets/images/bio_lab_asset.svg');
+
   /// File path: assets/images/cancel.png
   AssetGenImage get cancel => const AssetGenImage('assets/images/cancel.png');
 
   /// File path: assets/images/cart.png
   AssetGenImage get cart => const AssetGenImage('assets/images/cart.png');
+
+  /// File path: assets/images/cropmain.svg
+  SvgGenImage get cropmain => const SvgGenImage('assets/images/cropmain.svg');
 
   /// File path: assets/images/delivery.png
   AssetGenImage get delivery =>
@@ -36,9 +46,21 @@ class $AssetsImagesGen {
   AssetGenImage get ediableoils =>
       const AssetGenImage('assets/images/ediableoils.png');
 
+  /// File path: assets/images/edible_oil_asset.svg
+  SvgGenImage get edibleOilAsset =>
+      const SvgGenImage('assets/images/edible_oil_asset.svg');
+
   /// File path: assets/images/equipment.png
   AssetGenImage get equipment =>
       const AssetGenImage('assets/images/equipment.png');
+
+  /// File path: assets/images/equipment_asset.svg
+  SvgGenImage get equipmentAsset =>
+      const SvgGenImage('assets/images/equipment_asset.svg');
+
+  /// File path: assets/images/fertilizer_asset.svg
+  SvgGenImage get fertilizerAsset =>
+      const SvgGenImage('assets/images/fertilizer_asset.svg');
 
   /// File path: assets/images/fertilizers.png
   AssetGenImage get fertilizers =>
@@ -52,8 +74,20 @@ class $AssetsImagesGen {
   AssetGenImage get ffbCollection =>
       const AssetGenImage('assets/images/ffb_collection.png');
 
+  /// File path: assets/images/ffbcollection.svg
+  SvgGenImage get ffbcollection =>
+      const SvgGenImage('assets/images/ffbcollection.svg');
+
   /// File path: assets/images/general.png
   AssetGenImage get general => const AssetGenImage('assets/images/general.png');
+
+  /// File path: assets/images/general_asset copy.svg
+  SvgGenImage get generalAssetCopy =>
+      const SvgGenImage('assets/images/general_asset copy.svg');
+
+  /// File path: assets/images/general_asset.svg
+  SvgGenImage get generalAsset =>
+      const SvgGenImage('assets/images/general_asset.svg');
 
   /// File path: assets/images/harvesting.png
   AssetGenImage get harvesting =>
@@ -158,12 +192,20 @@ class $AssetsImagesGen {
   /// File path: assets/images/labour.png
   AssetGenImage get labour => const AssetGenImage('assets/images/labour.png');
 
+  /// File path: assets/images/labour_asset.svg
+  SvgGenImage get labourAsset =>
+      const SvgGenImage('assets/images/labour_asset.svg');
+
   /// File path: assets/images/landingpagebackground.png
   AssetGenImage get landingpagebackground =>
       const AssetGenImage('assets/images/landingpagebackground.png');
 
   /// File path: assets/images/loan.png
   AssetGenImage get loan => const AssetGenImage('assets/images/loan.png');
+
+  /// File path: assets/images/loan_asset.svg
+  SvgGenImage get loanAsset =>
+      const SvgGenImage('assets/images/loan_asset.svg');
 
   /// File path: assets/images/logo_final.png
   AssetGenImage get logoFinal =>
@@ -181,6 +223,14 @@ class $AssetsImagesGen {
   AssetGenImage get nurseriesIcon =>
       const AssetGenImage('assets/images/nurseries_icon.png');
 
+  /// File path: assets/images/oil_plam_asset copy.svg
+  SvgGenImage get oilPlamAssetCopy =>
+      const SvgGenImage('assets/images/oil_plam_asset copy.svg');
+
+  /// File path: assets/images/oil_plam_asset.svg
+  SvgGenImage get oilPlamAsset =>
+      const SvgGenImage('assets/images/oil_plam_asset.svg');
+
   /// File path: assets/images/oilpalm.png
   AssetGenImage get oilpalm => const AssetGenImage('assets/images/oilpalm.png');
 
@@ -188,12 +238,24 @@ class $AssetsImagesGen {
   AssetGenImage get palm360Logo =>
       const AssetGenImage('assets/images/palm360_logo.png');
 
+  /// File path: assets/images/palmmitra_splash.png
+  AssetGenImage get palmmitraSplash =>
+      const AssetGenImage('assets/images/palmmitra_splash.png');
+
   /// File path: assets/images/passbook.png
   AssetGenImage get passbook =>
       const AssetGenImage('assets/images/passbook.png');
 
   /// File path: assets/images/pest.png
   AssetGenImage get pest => const AssetGenImage('assets/images/pest.png');
+
+  /// File path: assets/images/pestanddiseases_asset copy.svg
+  SvgGenImage get pestanddiseasesAssetCopy =>
+      const SvgGenImage('assets/images/pestanddiseases_asset copy.svg');
+
+  /// File path: assets/images/pestanddiseases_asset.svg
+  SvgGenImage get pestanddiseasesAsset =>
+      const SvgGenImage('assets/images/pestanddiseases_asset.svg');
 
   /// File path: assets/images/progress-complete.svg
   SvgGenImage get progressComplete =>
@@ -207,22 +269,39 @@ class $AssetsImagesGen {
   AssetGenImage get quickPay =>
       const AssetGenImage('assets/images/quick_pay.png');
 
+  /// File path: assets/images/quick_pay_asset.svg
+  SvgGenImage get quickPayAsset =>
+      const SvgGenImage('assets/images/quick_pay_asset.svg');
+
   /// File path: assets/images/visit.png
   AssetGenImage get visit => const AssetGenImage('assets/images/visit.png');
+
+  /// File path: assets/images/visit_asset.svg
+  SvgGenImage get visitAsset =>
+      const SvgGenImage('assets/images/visit_asset.svg');
 
   /// List of all assets
   List<dynamic> get values => [
         appbg,
         arrowDown,
+        bill,
+        bioLabAsset,
         cancel,
         cart,
+        cropmain,
         delivery,
         ediableoils,
+        edibleOilAsset,
         equipment,
+        equipmentAsset,
+        fertilizerAsset,
         fertilizers,
         fertilizers1,
         ffbCollection,
+        ffbcollection,
         general,
+        generalAssetCopy,
+        generalAsset,
         harvesting,
         homeIcon,
         homeIcon2,
@@ -252,20 +331,29 @@ class $AssetsImagesGen {
         icUser,
         infoIcon,
         labour,
+        labourAsset,
         landingpagebackground,
         loan,
+        loanAsset,
         logoFinal,
         mainVisit,
         noproductImage,
         nurseriesIcon,
+        oilPlamAssetCopy,
+        oilPlamAsset,
         oilpalm,
         palm360Logo,
+        palmmitraSplash,
         passbook,
         pest,
+        pestanddiseasesAssetCopy,
+        pestanddiseasesAsset,
         progressComplete,
         progressComplete2,
         quickPay,
-        visit
+        quickPayAsset,
+        visit,
+        visitAsset
       ];
 }
 

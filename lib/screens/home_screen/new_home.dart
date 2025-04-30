@@ -8,6 +8,7 @@ import 'package:akshaya_flutter/Services/plots_screen.dart';
 import 'package:akshaya_flutter/common_utils/api_config.dart';
 import 'package:akshaya_flutter/common_utils/common_styles.dart';
 import 'package:akshaya_flutter/common_utils/shared_prefs_keys.dart';
+import 'package:akshaya_flutter/gen/assets.gen.dart';
 import 'package:akshaya_flutter/localization/locale_keys.dart';
 import 'package:akshaya_flutter/models/banner_model.dart';
 import 'package:akshaya_flutter/models/learning_model.dart';
@@ -23,6 +24,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:marquee/marquee.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -139,10 +141,19 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
       rethrow;
     }
   }
+/* 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    setState(() {
+      learningsData = getLearningsData();
+    });
+  } */
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    EasyLocalization.of(context)?.locale;
     setState(() {
       learningsData = getLearningsData();
     });
@@ -173,23 +184,22 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                       header(isTablet),
                       const SizedBox(height: 12),
                       SizedBox(
-                        // height: remainingHeight * 0.03,
                         height: isTablet ? 50 : 40,
                         child: marqueeText(),
                       ),
                       banners(size),
 
                       const SizedBox(height: 12),
-                      sectionTemplate(tr(LocaleKeys.view)),
+                      sectionLabel(tr(LocaleKeys.view)),
                       const SizedBox(height: 6),
                       viewGrid(size),
                       // overViewSection(size),
                       const SizedBox(height: 10),
-                      sectionTemplate(tr(LocaleKeys.req_services)),
+                      sectionLabel(tr(LocaleKeys.req_services)),
                       const SizedBox(height: 6),
-                      requestServicesSection(size),
+                      servicesSection(size),
                       const SizedBox(height: 10),
-                      sectionTemplate(tr(LocaleKeys.learning)),
+                      sectionLabel(tr(LocaleKeys.learning)),
                       const SizedBox(height: 6),
                       learningSection(size),
                       // learningRourcesSection(size),
@@ -209,16 +219,19 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
     {
       'title': tr(LocaleKeys.collection),
       'widget': const FfbCollectionScreen(),
+      'assetName': Assets.images.ffbcollection.path,
     },
     {
       'title': tr(LocaleKeys.payments),
       'widget': const FarmerPassbookScreen(),
+      'assetName': Assets.images.bill.path,
     },
     {
       'title': tr(LocaleKeys.recommendationss),
       'widget': const PlotSelectionScreen(
         serviceTypeId: 101,
       ),
+      'assetName': Assets.images.cropmain.path,
     },
   ];
 
@@ -257,7 +270,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
     );
   }
 
-  Text sectionTemplate(String title) {
+  Text sectionLabel(String title) {
     return Text(
       ' $title',
       style: CommonStyles.txStyF20CbFcF5.copyWith(
@@ -316,66 +329,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
     );
   }
 
-/* 
-  Column requestServicesSection(Size size) {
-    final isTablet = size.width > 600;
-    return Column(
-      children: [
-        Row(
-          children: [
-            customLayout(
-              size: size,
-              assetName: 'assets/pl.svg',
-              title: 'Fertilizer',
-              onTap: () {},
-            ),
-            SizedBox(width: isTablet ? 20 : 12),
-            customLayout(
-              size: size,
-              assetName: 'assets/pl.svg',
-              title: 'Equipment',
-              onTap: () {},
-            ),
-            SizedBox(width: isTablet ? 20 : 12),
-            customLayout(
-              size: size,
-              assetName: 'assets/pl.svg',
-              title: 'Bio Lab',
-              onTap: () {},
-            ),
-          ],
-        ),
-        SizedBox(height: isTablet ? 20 : 12),
-        Row(
-          children: [
-            customLayout(
-              size: size,
-              assetName: 'assets/pl.svg',
-              title: 'Fertilizer',
-              onTap: () {},
-            ),
-            SizedBox(width: isTablet ? 20 : 12),
-            customLayout(
-              size: size,
-              assetName: 'assets/pl.svg',
-              title: 'Equipment',
-              onTap: () {},
-            ),
-            SizedBox(width: isTablet ? 20 : 12),
-            customLayout(
-              size: size,
-              assetName: 'assets/pl.svg',
-              title: 'Bio Lab',
-              onTap: () {},
-            ),
-          ],
-        )
-      ],
-    );
-  }
- */
-
-  Widget requestServicesSection(Size size) {
+  Widget servicesSection(Size size) {
     return FutureBuilder(
       future: servicesData,
       builder: (context, snapshot) {
@@ -405,17 +359,23 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
   }
 
   GridView viewGrid(Size size) {
-    return GridView.count(
-      crossAxisCount: 3,
+    return GridView.builder(
+      itemCount: views.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
+        crossAxisSpacing: 12,
+        mainAxisSpacing: 12,
+      ),
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      crossAxisSpacing: 12,
-      mainAxisSpacing: 12,
-      children: views.map((item) {
+      itemBuilder: (context, index) {
+        final item = views[index];
         return customLayout(
           size: size,
-          title: item['title'],
+          title: getServiceName(index),
+          // title: item['title'],
           padding: EdgeInsets.zero,
+          assetName: item['assetName'],
           onTap: () {
             Navigator.push(
               context,
@@ -425,7 +385,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
             );
           },
         );
-      }).toList(),
+      },
     );
   }
 
@@ -440,6 +400,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
         return customLayout(
           size: size,
           title: getServiceName(serviceTypeId),
+          assetName: getServiceAssetImg(serviceTypeId),
           padding: EdgeInsets.zero,
           onTap: () => navigateToSelectedServiceScreen(serviceTypeId),
         );
@@ -478,6 +439,12 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
 
   String getServiceName(int serviceTypeId) {
     switch (serviceTypeId) {
+      case 0: // Collection
+        return tr(LocaleKeys.collection);
+      case 1: // Passbook
+        return tr(LocaleKeys.payments);
+      case 2: // Recommendations
+        return tr(LocaleKeys.recommendationss);
       case 10: // Pole Request
         return tr(LocaleKeys.pole);
       case 11: // Labour Request
@@ -499,6 +466,56 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
 
       default:
         return tr(LocaleKeys.my3F);
+    }
+  }
+
+  String getServiceAssetImg(int serviceTypeId) {
+    switch (serviceTypeId) {
+      case 10: // Pole Request
+        return Assets.images.equipmentAsset.path;
+      case 11: // Labour Request
+        return Assets.images.labourAsset.path;
+      case 12: // Fertilizer Request
+        return Assets.images.fertilizerAsset.path;
+      case 13: // QuickPay Request
+        return Assets.images.quickPayAsset.path;
+      case 14: // Visit Request
+        return Assets.images.visitAsset.path;
+      case 28: // Loan Request
+        return Assets.images.loanAsset.path;
+      case 107: // Bio Lab Request
+        return Assets.images.bioLabAsset.path;
+      case 108: // Transport Request
+        return Assets.images.progressComplete.path;
+      case 116: // Edible Oils Request
+        return Assets.images.edibleOilAsset.path;
+      case 501: // Pest and Disease
+        return Assets.images.pestanddiseasesAsset.path;
+      case 502: // Oil Palm Management
+        return Assets.images.oilPlamAsset.path;
+      case 503: // General
+        return Assets.images.generalAsset.path;
+
+      default:
+        return Assets.images.progressComplete.path;
+    }
+  }
+
+  String getLearningsAssetImg(int serviceTypeId) {
+    switch (serviceTypeId) {
+      case 0: // Fertilizers
+        return Assets.images.fertilizerAsset.path;
+      case 1: // Harversting
+        return Assets.images.equipmentAsset.path;
+      case 2: // Pest and Disease
+        return Assets.images.pestanddiseasesAsset.path;
+      case 3: // Oil Palm Management
+        return Assets.images.oilPlamAsset.path;
+      case 4: // General
+        return Assets.images.generalAsset.path;
+
+      default:
+        return Assets.images.progressComplete.path;
     }
   }
 
@@ -529,49 +546,8 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
       ],
     );
   }
-/* 
-  Container header2() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      color: Colors.white,
-      child: Row(
-        children: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.menu),
-            color: CommonStyles.themeTextColor,
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Jessy Grey',
-                  style: CommonStyles.txStyF20CbFcF5.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: CommonStyles.themeTextColor,
-                  ),
-                ),
-                Text(
-                  'Tech Manager',
-                  style: CommonStyles.txStyF20CbFcF5.copyWith(
-                    fontSize: 12,
-                    color: CommonStyles.themeTextColor,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          _buildUserProfile('Jessy Grey'),
-        ],
-      ),
-    );
-  }
- */
 
-  Widget _buildUserProfile(String userName) {
+/*   Widget _buildUserProfile(String userName) {
     String initials = _getInitials(userName);
 
     return Container(
@@ -602,8 +578,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
     } else {
       return (parts[0][0] + parts[1][0]).toUpperCase();
     }
-  }
-
+  } */
 
   IconData getIconForTitle(String? title) {
     switch (title?.toLowerCase()) {
@@ -635,8 +610,9 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          padding: padding ??
-              EdgeInsets.symmetric(vertical: isTablet ? 20 : 16, horizontal: 5),
+          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 3),
+          // padding: padding ??
+          //     EdgeInsets.symmetric(vertical: isTablet ? 20 : 16, horizontal: 5),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: CommonStyles.homeBorderColor),
@@ -646,16 +622,24 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: EdgeInsets.all(isTablet ? 20 : 16),
-                decoration: BoxDecoration(
+                padding: EdgeInsets.all(isTablet ? 18 : 14),
+                decoration: const BoxDecoration(
                   color: CommonStyles.homeBgColor,
                   shape: BoxShape.circle,
                 ),
-                child: Icon(
+                child: SvgPicture.asset(
+                  assetName ?? '',
+                  width: 25,
+                  height: 25,
+                  fit: BoxFit.contain,
+                  color: CommonStyles.themeTextColor,
+                ),
+
+                /*  Icon(
                   getIconForTitle(title),
                   color: CommonStyles.themeTextColor,
                   size: isTablet ? 40 : 30,
-                ),
+                ), */
               ),
               const SizedBox(height: 5),
               Text(
@@ -664,6 +648,8 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                 style: CommonStyles.txStyF14CbFF6.copyWith(
                   fontSize: isTablet ? 16 : 14,
                 ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),
@@ -671,66 +657,6 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
       ),
     );
   }
-
-/*  Widget customLayout(
-      {String? title,
-      String? assetName,
-      void Function()? onTap,
-      required Size size,
-      EdgeInsetsGeometry? padding}) {
-    final isTablet = size.width > 600;
-    return Expanded(
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          // height: size.height * 0.19,
-          padding: padding ??
-              EdgeInsets.symmetric(vertical: isTablet ? 20 : 16, horizontal: 5),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: CommonStyles.homeBorderColor,
-            ),
-            color: Colors.white,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: EdgeInsets.all(isTablet ? 20 : 16),
-                decoration: BoxDecoration(
-                  color: CommonStyles.homeBgColor,
-                  shape: BoxShape.circle,
-                ),
-                child:
-                    *//* SvgPicture.asset(
-                        assetName,
-                        color: iconColor,
-                        fit: BoxFit.cover,
-                        width: isTablet ? 40 : 30,
-                        height: isTablet ? 40 : 30,
-                      ), *//*
-
-                    Icon(
-                  Icons.check_circle_outline,
-                  color: CommonStyles.themeTextColor,
-                  size: isTablet ? 40 : 30,
-                ),
-              ),
-              const SizedBox(height: 5),
-              Text(
-                title ?? '',
-                textAlign: TextAlign.center,
-                style: CommonStyles.txStyF14CbFF6.copyWith(
-                  fontSize: isTablet ? 16 : 14,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }*/
 
   void navigateToSelectedServiceScreen(int serviceTypeId) {
     switch (serviceTypeId) {
@@ -882,6 +808,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
         return customLayout(
           size: size,
           title: learnings[index],
+          assetName: getLearningsAssetImg(index),
           padding: EdgeInsets.zero,
           onTap: () =>
               navigateToSelectedLearningScreen(learnings[index], index),
@@ -910,7 +837,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
           final marquee = snapshot.data as List<BannerModel>;
           return Marquee(
             text:
-            "${marquee[0].description!}                                        ${marquee[0].description!}                                        ",
+                "${marquee[0].description!}                                        ${marquee[0].description!}                                        ",
             style: CommonStyles.txStyF12CbFF6,
           );
         } else if (snapshot.hasError) {

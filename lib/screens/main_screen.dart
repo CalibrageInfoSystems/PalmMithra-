@@ -314,18 +314,6 @@ class _MainScreenPageState extends State<MainScreen> {
                               onTap: () {
                                 logOutDialog(context);
                               }),
-                          menuOption(
-                              title: 'New Home',
-                              menuIcon: Assets.images.icHome.path,
-                              isPng: true,
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const NewHomeScreen(),
-                                  ),
-                                );
-                              }),
                         ],
                       ),
                     ),
@@ -402,11 +390,11 @@ class _MainScreenPageState extends State<MainScreen> {
   Widget _buildScreens(int index, BuildContext context) {
     switch (index) {
       case 0:
-        return const HomeScreen();
+        // return const HomeScreen();
+        return const NewHomeScreen();
 
       case 1:
-        return const NewHomeScreen();
-      // return const ProfileScreen();
+        return const ProfileScreen();
 
       case 2:
         return const My3fScreen();
