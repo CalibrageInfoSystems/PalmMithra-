@@ -5,4 +5,5 @@ class SharedPrefsKeys {
   static const String statecode = "statecode";
   static const String districtId = "districtId";
   static const String districtName = "districtName";
+  static const String farmerName = "firstName";
 }

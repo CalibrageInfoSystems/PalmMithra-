@@ -25,6 +25,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:marquee/marquee.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -41,13 +43,16 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
   late Future<List<int>> servicesData;
   late Future<List<String?>> learningsData;
   late Future<List<BannerModel>> bannersAndMarqueeTextData;
-
+  String greeting = "Good Morning";
+  String location = "";
+  String temperature = "";
   @override
   void initState() {
     super.initState();
     servicesData = getServicesData();
     learningsData = getLearningsData();
     bannersAndMarqueeTextData = getBannersAndMarqueeText();
+    _initializeGreetingWeather();
   }
 
   Future<List<int>> getServicesData() async {
@@ -251,7 +256,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'Good Morning, Jessy!',
+            '$greeting,',
             style: CommonStyles.txStyF20CbFcF5.copyWith(
               fontWeight: FontWeight.bold,
               color: CommonStyles.whiteColor,
@@ -259,7 +264,9 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
           ),
           const SizedBox(height: 5),
           Text(
-            'Sunny, 25°C in Bangalore',
+            location.isNotEmpty && temperature.isNotEmpty
+                ? "Sunny, $temperature in $location"
+                : "Fetching weather...",
             style: CommonStyles.txStyF20CbFcF5.copyWith(
               fontSize: 13,
               color: CommonStyles.whiteColor,
@@ -846,5 +853,65 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
         return const ShimmerWidn();
       },
     );
+  }
+
+  Future<void> _initializeGreetingWeather() async {
+    await _determinePositionAndFetchWeather();
+    _setGreetingMessage();
+  }
+
+  Future<void> _setGreetingMessage() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? farmerName = prefs.getString(SharedPrefsKeys.farmerName);
+    final hour = DateTime.now().hour;
+    if (hour < 12) {
+      greeting = "Good Morning $farmerName!";
+    } else if (hour < 17) {
+      greeting = "Good Afternoon $farmerName!";
+    } else {
+      greeting = "Good Evening $farmerName!";
+    }
+    setState(() {});
+  }
+
+  Future<void> _determinePositionAndFetchWeather() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Check location service
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      return;
+    }
+
+    // Check permission
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+    }
+
+    if (permission == LocationPermission.deniedForever || permission == LocationPermission.denied) {
+      return;
+    }
+
+    // Get location
+    final position = await Geolocator.getCurrentPosition();
+    final placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
+    final city = placemarks.first.locality ?? "your location";
+
+    // Fetch weather
+    const apiKey = "4755e93e3d4db57175e81d1e1d10d111"; // Replace with your OpenWeatherMap API key
+    final url =
+        'https://api.openweathermap.org/data/2.5/weather?lat=${position.latitude}&lon=${position.longitude}&units=metric&appid=$apiKey';
+print('weather url===$url');
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final temp = data['main']['temp'].toString();
+      setState(() {
+        location = city;
+        temperature = "$temp°C";
+      });
+    }
   }
 }

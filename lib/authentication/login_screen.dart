@@ -4,16 +4,15 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:akshaya_flutter/authentication/login_otp_screen.dart';
-import 'package:akshaya_flutter/authentication/xxx.dart';
 import 'package:akshaya_flutter/common_utils/api_config.dart';
 import 'package:akshaya_flutter/common_utils/common_styles.dart';
+import 'package:akshaya_flutter/gen/assets.gen.dart';
 import 'package:akshaya_flutter/localization/locale_keys.dart';
 import 'package:akshaya_flutter/models/FarmerResponseModel.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
@@ -69,203 +68,141 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Stack(
                 children: [
                   Image.asset(
-                    'assets/images/appbg.png',
+                    Assets.images.farmerAppLogin.path,
+                    // 'assets/images/farmer_app_login.jpg',
                     width: double.infinity,
                     height: double.infinity,
                     fit: BoxFit.cover,
                   ),
-                  Container(
+                  /*  Container(
                     color: const Color(0x8D000000),
-                  ),
+                  ), */
                   Padding(
-                    padding: const EdgeInsets.only(top: 180.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Align(
-                          alignment: Alignment.topCenter,
-                          child: Image.asset(
-                            'assets/images/ic_user.png',
-                            width: 200,
-                            height: 150,
+                      padding: const EdgeInsets.only(left: 20, right: 20,top: 50),
+                      child:
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Align(
+                            alignment: Alignment.topCenter,
+                            child: Column(
+                              children: [
+                                Image.asset(
+                                  Assets.images.palm360Logo.path,
+                                ),
+                                Text(
+                                  'Palm Mitra',
+                                  style: CommonStyles.txStyF20CwFF6.copyWith(
+                                    fontSize: 24,
+                                    color: CommonStyles.blackColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        Text(tr(LocaleKeys.welcome),
-                            style: CommonStyles.txSty_24w),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 22.0, left: 22.0, right: 22.0),
-                          child: TextFormField(
+                          const SizedBox(height: 10),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                " Grower Id",
+                                style: TextStyle(
+                                  color: CommonStyles.blackColor,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          TextFormField(
                             controller: _farmercodeController,
                             decoration: InputDecoration(
-                              // hintText: tr(LocaleKeys.farmar_id),
-                              hintText: 'Enter Grower Id',
-
+                              hintText: tr(LocaleKeys.farmar_id),
+                              filled: true,
+                              fillColor: CommonStyles.whiteColor,
                               focusedBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
-                                  color: Colors.white,
+                                  color: CommonStyles.themeTextColor,
                                 ),
-                                borderRadius: BorderRadius.circular(
-                                    10.0), // Set the border radius
+                                borderRadius: BorderRadius.circular(10.0),
                               ),
                               enabledBorder: OutlineInputBorder(
                                 borderSide: const BorderSide(
-                                  color: Colors
-                                      .white, // Set the border line color to white
+                                  color: CommonStyles.themeTextColor,
                                 ),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                               hintStyle: CommonStyles.txStyF20CwFF6.copyWith(
                                 color: Colors.grey.shade500,
                               ),
-                              contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 15, horizontal: 15),
-                              alignLabelWithHint:
-                                  true, // Center-align the hint text
+                              contentPadding:
+                              const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                              alignLabelWithHint: true,
                             ),
-                            textAlign: TextAlign.center,
-
                             style: CommonStyles.txStyF20CwFF6.copyWith(
-                              // decoration: TextDecoration.underline,
-                              decorationColor: Colors.white,
+                              color: Colors.black,
                             ),
-                            textCapitalization: TextCapitalization
-                                .characters, // Automatically enables CAPS lock
+                            textCapitalization: TextCapitalization.characters,
                             inputFormatters: [
-                              FilteringTextInputFormatter.allow(RegExp(
-                                  r'[A-Z0-9]')), // Allows only uppercase letters and numbers
+                              FilteringTextInputFormatter.allow(RegExp(r'[A-Z0-9]')),
                             ],
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 22.0, left: 22.0, right: 22.0),
-                          child: SizedBox(
-                            width: double.infinity,
-                            // Makes the button take up the full width of its parent
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                    20.0), // Rounded corners
-                                gradient: const LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    Color(
-                                        0xFFCCCCCC), // Start color (light gray)
-                                    Color(0xFFFFFFFF), // Center color (white)
-                                    Color(0xFFCCCCCC), // End color (light gray)
-                                  ],
-                                ),
-                                border: Border.all(
-                                  color: const Color(
-                                      0xFFe86100), // Orange border color
-                                  width: 2.0,
-                                ),
+                          const SizedBox(height: 30),
+                          ElevatedButton(
+                            onPressed: () async {
+                              FocusScope.of(context).unfocus();
+                              bool validationSuccess = await isvalidations();
+                              if (validationSuccess) {
+                                onLoginPressed();
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: CommonStyles.loginBtnColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                              child: ElevatedButton(
-                                onPressed: () async {
-                                  FocusScope.of(context).unfocus();
-                                  bool validationSuccess =
-                                      await isvalidations();
-                                  if (validationSuccess) {
-                                    onLoginPressed();
-                                  }
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 0),
-                                  backgroundColor: Colors
-                                      .transparent, // Transparent to show the gradient
-                                  shadowColor: Colors
-                                      .transparent, // Remove button shadow
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                ),
-                                child: Text(
-                                  tr(LocaleKeys.login),
-                                  style: CommonStyles.txSty_16p_fb,
-                                  // style: CommonStyles.text18orange,
-                                ),
-                              ),
+                              padding: const EdgeInsets.symmetric(vertical: 15),
+                              minimumSize: const Size(double.infinity, 0),
                             ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 6.0),
-                          child: Container(
-                            alignment: AlignmentDirectional.center,
                             child: Text(
-                              tr(LocaleKeys.or),
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              tr(LocaleKeys.login),
+                              style: const TextStyle(fontSize: 18, color: Colors.white),
                             ),
                           ),
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 10.0, left: 22.0, right: 22.0),
-                          child: SizedBox(
-                            width: double.infinity,
-                            // Makes the button take up the full width of its parent
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                    20.0), // Rounded corners
-                                gradient: const LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [
-                                    Color(
-                                        0xFFCCCCCC), // Start color (light gray)
-                                    Color(0xFFFFFFFF), // Center color (white)
-                                    Color(0xFFCCCCCC), // End color (light gray)
-                                  ],
-                                ),
-                                border: Border.all(
-                                  color: const Color(
-                                      0xFFe86100), // Orange border color
-                                  width: 2.0,
-                                ),
-                              ),
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  /*  print('scan btn clicked');
-                                  _scanQR(); */
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => Xxx(),
-                                    ),
-                                  );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 0),
-                                  backgroundColor: Colors
-                                      .transparent, // Transparent to show the gradient
-                                  shadowColor: Colors
-                                      .transparent, // Remove button shadow
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                ),
+                          const SizedBox(height: 20),
+                          Row(
+                            children: [
+                              const Expanded(child: Divider(color: Colors.grey, thickness: 1)),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 10),
                                 child: Text(
-                                  tr(LocaleKeys.scan_qr),
-                                  style: CommonStyles.txSty_16p_fb,
-                                  // style: CommonStyles.text18orange,
+                                  'OR',
+                                  style: TextStyle(color: Colors.grey, fontSize: 16),
                                 ),
                               ),
+                              const Expanded(child: Divider(color: Colors.grey, thickness: 1)),
+                            ],
+                          ),
+                          const SizedBox(height: 20),
+                          ElevatedButton(
+                            onPressed: _scanQR,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: CommonStyles.greenColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              padding: const EdgeInsets.symmetric(vertical: 15),
+                              minimumSize: const Size(double.infinity, 0),
+                            ),
+                            child: Text(
+                              tr(LocaleKeys.scan_qr),
+                              style: const TextStyle(fontSize: 18, color: Colors.white),
                             ),
                           ),
-                        ),
-                        // Other Buttons
-                      ],
-                    ),
+                        ],
+                      )
+
                   ),
                 ],
               ),
@@ -365,55 +302,6 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  // Future<void> _scanQR() async {
-  //   try {
-  //     var status = await Permission.camera.request();
-  //     print('qrscan: status $status');
-
-  //     if (status.isGranted) {
-  //       String? cameraScanResult = await scanner.scan();
-  //       setState(() {
-  //         print('qrscan: cameraScanResult $cameraScanResult');
-  //         if (cameraScanResult != null) {
-  //           _farmercodeController.text = cameraScanResult;
-  //         }
-  //       });
-  //     } else if (status == PermissionStatus.permanentlyDenied ||
-  //         status == PermissionStatus.denied) {
-  //       openAppSettings();
-  //     } else {
-  //       print('Camera permission is required.');
-  //       CommonStyles.showCustomDialog(
-  //           context, 'Camera permission is required.');
-  //     }
-  //   } catch (e) {
-  //     print('qrscan: e $e');
-  //   }
-  // }
-
-  // Future<void> _scanQR() async {
-  //   // Request camera permission
-  //   var status = await Permission.camera.isGranted;
-  //   print('status: $status');
-  //   if (status) {
-  //     try {
-  //       String? cameraScanResult = await scanner.scan();
-  //       setState(() {
-  //         if (cameraScanResult != null) {
-  //           _farmercodeController.text = cameraScanResult;
-  //         }
-  //       });
-  //     } on PlatformException catch (e) {
-  //       print(e);
-  //     }
-  //   } else {
-  //     // Handle permission denied
-  //     setState(() {
-  //       _farmercodeController.text = "Camera permission denied";
-  //     });
-  //   }
-  // }
-
   Future<bool> isvalidations() async {
     bool isValid = true;
 
@@ -422,7 +310,7 @@ class _LoginScreenState extends State<LoginScreen> {
       isValid = false;
     }
 
-    return isValid; // Return true if validation is successful, false otherwise
+    return isValid;
   }
 
   void _showErrorDialog(String message) {

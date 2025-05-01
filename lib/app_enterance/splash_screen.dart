@@ -37,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       duration: const Duration(seconds: 4),
     );
 
-    _logoScaleAnimation = Tween<double>(begin: 1.0, end: 1.0).animate(
+    _logoScaleAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
     );
 
@@ -52,7 +52,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     );
     _animationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-  navigateToNextScreen();
+ // navigateToNextScreen();
       }
     });
     _animationController.forward();
@@ -94,7 +94,6 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -103,62 +102,63 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       backgroundColor: const Color(0xFFFFF1E0),
       body: Stack(
         children: [
-          // Background Image
+          // Solid Background Color
+          Container(
+            color: const Color(0xFFFFF1E0),
+          ),
+
+          // Animated Background Image
           FadeTransition(
             opacity: _bgFadeAnimation,
             child: Center(
               child: Image.asset(
-                'assets/images/palmmitra_splash.png',
+                'assets/images/palmmitra_splash.png', // Use your uploaded image
                 width: size.width,
-                height: size.width,
+                height: size.height ,
                 fit: BoxFit.contain,
               ),
             ),
           ),
 
-          // Centered Logo and Text
-          Align(
-            alignment: Alignment.center,
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // Animated Logo
-                  AnimatedBuilder(
-                    animation: _animationController,
-                    builder: (context, child) {
-                      return Transform.scale(
-                        scale: _logoScaleAnimation.value,
-                        child: Image.asset(
-                          'assets/images/palm360_logo.png',
-                          width: 180,
-                          height: 180,
-                        ),
-                      );
-                    },
+          // Foreground logo and text
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // App logo with scale animation
+                AnimatedBuilder(
+                  animation: _animationController,
+                  builder: (context, child) {
+                    return Transform.scale(
+                      scale: _logoScaleAnimation.value,
+                      child: Image.asset(
+                        'assets/images/palm360_logo.png',
+                        width: 150,
+                        height: 150,
+                      ),
+                    );
+                  },
+                ),
+              //  const SizedBox(height: 16),
+                Positioned(
+                  bottom: 100, // Adjust as needed for spacing
+                  child: const TypewriterText(
+                    text: "Palm Mitra",
+                    color: Color(0xFFCE0E2D),
                   ),
-                const SizedBox(height: 20),
-
-                  // Clean Text
-
-                ],
-              ),
+                ),
+                // const TypewriterText(
+                //   text: " Palm Mitra",
+                //   color: Color(0xFFCE0E2D),
+                // ),
+              ],
             ),
           ),
-          Positioned(
-            top: size.height * 0.6,
-            left: size.width * 0.4,
-
-            child: const TypewriterText(
-            text: "Palm Mithra",
-            color: Color(0xFFCE0E2D),
-          ),)
-
         ],
       ),
     );
   }
+
 
   Future<void> loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -327,7 +327,7 @@ class _SplashScreenState extends State<SplashScreen>
     const SizedBox(height: 16),
 
     const TypewriterText(
-    text: "Welcome to Palm Mithra",
+    text: "Welcome to Palm Mitra",
     color: Color(0xFFCE0E2D),
     ),
     ],

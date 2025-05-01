@@ -251,7 +251,8 @@ class _LoginOtpScreenState extends State<LoginOtpScreen> {
               data['result']['farmerDetails'][0]['districtId']);
           prefs.setString(SharedPrefsKeys.districtName,
               data['result']['farmerDetails'][0]['districtName']);
-
+          prefs.setString(SharedPrefsKeys.farmerName ,
+              data['result']['farmerDetails'][0]['firstName']);
           print("Navigating to Home screen");
 
           // Hide loading dialog and stop loading before navigating
