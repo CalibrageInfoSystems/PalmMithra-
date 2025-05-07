@@ -188,10 +188,10 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                     children: [
                       header(isTablet),
                       const SizedBox(height: 12),
-                      SizedBox(
+             /*         SizedBox(
                         height: isTablet ? 50 : 40,
                         child: marqueeText(),
-                      ),
+                      ),*/
                       banners(size),
 
                       const SizedBox(height: 12),
@@ -256,7 +256,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            '$greeting,',
+            '$greeting',
             style: CommonStyles.txStyF20CbFcF5.copyWith(
               fontWeight: FontWeight.bold,
               color: CommonStyles.whiteColor,

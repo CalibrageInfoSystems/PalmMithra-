@@ -78,9 +78,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     color: const Color(0x8D000000),
                   ), */
                   Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 20,top: 50),
-                      child:
-                      Column(
+                      padding:
+                          const EdgeInsets.only(left: 20, right: 20, top: 50),
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Align(
@@ -136,8 +136,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               hintStyle: CommonStyles.txStyF20CwFF6.copyWith(
                                 color: Colors.grey.shade500,
                               ),
-                              contentPadding:
-                              const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 15, horizontal: 15),
                               alignLabelWithHint: true,
                             ),
                             style: CommonStyles.txStyF20CwFF6.copyWith(
@@ -145,7 +145,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             textCapitalization: TextCapitalization.characters,
                             inputFormatters: [
-                              FilteringTextInputFormatter.allow(RegExp(r'[A-Z0-9]')),
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'[A-Z0-9]')),
                             ],
                           ),
                           const SizedBox(height: 30),
@@ -167,21 +168,27 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             child: Text(
                               tr(LocaleKeys.login),
-                              style: const TextStyle(fontSize: 18, color: Colors.white),
+                              style: const TextStyle(
+                                  fontSize: 18, color: Colors.white),
                             ),
                           ),
                           const SizedBox(height: 20),
                           Row(
                             children: [
-                              const Expanded(child: Divider(color: Colors.grey, thickness: 1)),
+                              const Expanded(
+                                  child: Divider(
+                                      color: Colors.grey, thickness: 1)),
                               const Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 10),
                                 child: Text(
                                   'OR',
-                                  style: TextStyle(color: Colors.grey, fontSize: 16),
+                                  style: TextStyle(
+                                      color: Colors.grey, fontSize: 16),
                                 ),
                               ),
-                              const Expanded(child: Divider(color: Colors.grey, thickness: 1)),
+                              const Expanded(
+                                  child: Divider(
+                                      color: Colors.grey, thickness: 1)),
                             ],
                           ),
                           const SizedBox(height: 20),
@@ -197,13 +204,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             child: Text(
                               tr(LocaleKeys.scan_qr),
-                              style: const TextStyle(fontSize: 18, color: Colors.white),
+                              style: const TextStyle(
+                                  fontSize: 18, color: Colors.white),
                             ),
                           ),
                         ],
-                      )
-
-                  ),
+                      )),
                 ],
               ),
             ),

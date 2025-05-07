@@ -238,6 +238,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/oilpalm.png
   AssetGenImage get oilpalm => const AssetGenImage('assets/images/oilpalm.png');
 
+  /// File path: assets/images/palm-mitra-splash-svg.svg
+  SvgGenImage get palmMitraSplashSvg =>
+      const SvgGenImage('assets/images/palm-mitra-splash-svg.svg');
+
   /// File path: assets/images/palm360_logo.png
   AssetGenImage get palm360Logo =>
       const AssetGenImage('assets/images/palm360_logo.png');
@@ -347,6 +351,7 @@ class $AssetsImagesGen {
         oilPlamAssetCopy,
         oilPlamAsset,
         oilpalm,
+        palmMitraSplashSvg,
         palm360Logo,
         palmmitraSplash,
         passbook,

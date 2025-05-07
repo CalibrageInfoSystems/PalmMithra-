@@ -4,9 +4,11 @@ import 'package:akshaya_flutter/authentication/login_screen.dart';
 import 'package:akshaya_flutter/common_utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../screens/main_screen.dart';
+
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -14,7 +16,8 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen>
+    with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _logoScaleAnimation;
   late AnimationController _bgController;
@@ -52,12 +55,13 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     );
     _animationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
- // navigateToNextScreen();
+    navigateToNextScreen();
       }
     });
     _animationController.forward();
     _bgController.forward();
   }
+
   void navigateToNextScreen() {
     if (isLogin) {
       // Navigate to home screen
@@ -86,7 +90,6 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     }
   }
 
-
   @override
   void dispose() {
     _animationController.dispose();
@@ -111,15 +114,14 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
           FadeTransition(
             opacity: _bgFadeAnimation,
             child: Center(
-              child: Image.asset(
-                'assets/images/palmmitra_splash.png', // Use your uploaded image
+              child: SvgPicture.asset(
+                'assets/images/palm-mitra-splash-svg.svg', // Use your SVG file
                 width: size.width,
-                height: size.height ,
+                height: size.height,
                 fit: BoxFit.contain,
               ),
             ),
           ),
-
           // Foreground logo and text
           Center(
             child: Column(
@@ -133,24 +135,19 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                       scale: _logoScaleAnimation.value,
                       child: Image.asset(
                         'assets/images/palm360_logo.png',
-                        width: 150,
-                        height: 150,
+                        width: 180,
+                        height: 180,
                       ),
                     );
                   },
                 ),
-              //  const SizedBox(height: 16),
-                Positioned(
+             Positioned(
                   bottom: 100, // Adjust as needed for spacing
                   child: const TypewriterText(
-                    text: "Palm Mitra",
+                    text: "",
                     color: Color(0xFFCE0E2D),
                   ),
                 ),
-                // const TypewriterText(
-                //   text: " Palm Mitra",
-                //   color: Color(0xFFCE0E2D),
-                // ),
               ],
             ),
           ),
@@ -158,7 +155,6 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       ),
     );
   }
-
 
   Future<void> loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -215,7 +211,7 @@ class _SplashScreenState extends State<SplashScreen>
       if (status == AnimationStatus.completed) {
         navigateToNextScreen();
       }
-    });*//*
+    });*/ /*
 
 
 //    _animationController.forward();
@@ -409,4 +405,3 @@ class _TypewriterTextState extends State<TypewriterText> {
     );
   }
 }
-
