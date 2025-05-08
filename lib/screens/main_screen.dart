@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:akshaya_flutter/authentication/language_screen.dart';
 import 'package:akshaya_flutter/authentication/login_screen.dart';
 import 'package:akshaya_flutter/common_utils/common_styles.dart';
 import 'package:akshaya_flutter/common_utils/custom_btn.dart';
@@ -314,6 +315,20 @@ class _MainScreenPageState extends State<MainScreen> {
                               onTap: () {
                                 logOutDialog(context);
                               }),
+                          /* menuOption(
+                              title: tr(LocaleKeys.app_name),
+                              menuIcon: Assets.images.icLogout.path,
+                              isPng: true,
+                              onTap: () {
+                                showLanguageSelectionDialog(context);
+                              }),
+                          menuOption(
+                              title: tr(LocaleKeys.account_no),
+                              menuIcon: Assets.images.icLogout.path,
+                              isPng: true,
+                              onTap: () {
+                                showLocalizationDialog(context);
+                              }), */
                         ],
                       ),
                     ),
@@ -417,6 +432,7 @@ class _MainScreenPageState extends State<MainScreen> {
   }
 
   void logOutDialog(BuildContext context) {
+    /* 
     showGeneralDialog(
       context: context,
       barrierDismissible: true,
@@ -476,105 +492,9 @@ class _MainScreenPageState extends State<MainScreen> {
                           padding: const EdgeInsets.symmetric(horizontal: 35.0),
                           btnTextColor: CommonStyles.primaryTextColor,
                           onPressed: () {
-                            /*  onConfirmLogout(context).whenComplete(
-                              () {
-                                Navigator.of(context).pop();
-                              },
-                            ); */
                             Navigator.of(context).pop();
                             onConfirmLogout(context);
                           }),
-
-                      /*  Padding(
-                        padding: const EdgeInsets.only(bottom: 10.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(20.0), // Rounded corners
-                            gradient: const LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Color(0xFFCCCCCC), // Start color (light gray)
-                                Color(0xFFFFFFFF), // Center color (white)
-                                Color(0xFFCCCCCC), // End color (light gray)
-                              ],
-                            ),
-                            border: Border.all(
-                              color: const Color(
-                                  0xFFe86100), // Orange border color
-                              width: 2.0,
-                            ),
-                          ),
-                          child: SizedBox(
-                            height: 30.0, // Set the desired height
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 35.0),
-                                backgroundColor: Colors.transparent,
-                                shadowColor: Colors.transparent,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                              ),
-                              child: Text(
-                                tr(LocaleKeys.cancel_capitalized),
-                                style: CommonStyles.txStyF16CpFF6,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(20.0), // Rounded corners
-                            gradient: const LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Color(0xFFCCCCCC), // Start color (light gray)
-                                Color(0xFFFFFFFF), // Center color (white)
-                                Color(0xFFCCCCCC), // End color (light gray)
-                              ],
-                            ),
-                            border: Border.all(
-                              color: const Color(
-                                  0xFFe86100), // Orange border color
-                              width: 2.0,
-                            ),
-                          ),
-                          child: SizedBox(
-                            height: 30.0, // Set the desired height
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                                onConfirmLogout(context);
-                              },
-                              style: ElevatedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 35.0),
-                                backgroundColor: Colors.transparent,
-                                shadowColor: Colors.transparent,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                              ),
-                              child: Text(
-                                tr(LocaleKeys.ok),
-                                style: CommonStyles.txStyF16CpFF6,
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                   */
                     ],
                   ),
                 ],
@@ -595,6 +515,46 @@ class _MainScreenPageState extends State<MainScreen> {
         );
       },
     );
+   */
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          title: Center(
+            child: const Text(
+              'Confirmation',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+          ),
+          content: const Text(
+            'Are you sure you want to log out?',
+            style: TextStyle(fontSize: 16),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.grey[700],
+              ),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: CommonStyles.themeTextColor,
+              ),
+              child: const Text('OK', style: TextStyle(color: Colors.white)),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Future<void> onConfirmLogout(BuildContext context) async {
@@ -607,7 +567,7 @@ class _MainScreenPageState extends State<MainScreen> {
   }
 
   void openLanguageDialog(BuildContext context) {
-    showGeneralDialog(
+    /*  showGeneralDialog(
       context: context,
       barrierDismissible: true,
       barrierLabel: '',
@@ -674,15 +634,208 @@ class _MainScreenPageState extends State<MainScreen> {
         );
       },
     );
+   */
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: '',
+      barrierColor: Colors.black54,
+      transitionDuration: const Duration(milliseconds: 500),
+      pageBuilder: (context, animation1, animation2) {
+        return AlertDialog(
+          contentPadding: const EdgeInsets.all(0),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          backgroundColor: Colors.white,
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                  radius: 30,
+                  backgroundColor: const Color(0xFFF8EAD9),
+                  child: SvgPicture.asset(
+                    Assets.images.languageExchange.path,
+                    width: 26,
+                    height: 26,
+                    fit: BoxFit.contain,
+                    color: const Color(0xFF4CAF50),
+                  )
+                  // Icon(Icons.translate, size: 50, color: Color(0xFF4CAF50),),
+                  ),
+              const SizedBox(height: 10),
+              Text(
+                'Choose Language',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'Select your preferred language from the options below.',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      fontWeight: FontWeight.w400,
+                    ),
+              ),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: 20),
+              _buildLanguageButton(context, 'English', Colors.blue,
+                  borderForTop: true),
+              _buildLanguageButton(context, 'తెలుగు', Colors.deepPurple),
+              _buildLanguageButton(context, 'ಕನ್ನಡ', Colors.teal,
+                  borderForBottom: false),
+              const SizedBox(height: 10),
+            ],
+          ),
+        );
+      },
+      transitionBuilder: (context, animation1, animation2, child) {
+        return ScaleTransition(
+          scale: Tween<double>(begin: 0.0, end: 1.0).animate(
+            CurvedAnimation(
+              parent: animation1,
+              curve: Curves.easeOutBack,
+            ),
+          ),
+          child: child,
+        );
+      },
+    );
+  }
+
+  void showLanguageSelectionDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          contentPadding: const EdgeInsets.all(0),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          backgroundColor: Colors.white,
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                  radius: 30,
+                  backgroundColor: const Color(0xFFF8EAD9),
+                  child: SvgPicture.asset(
+                    Assets.images.languageExchange.path,
+                    width: 26,
+                    height: 26,
+                    fit: BoxFit.contain,
+                    color: const Color(0xFF4CAF50),
+                  )
+                  // Icon(Icons.translate, size: 50, color: Color(0xFF4CAF50),),
+                  ),
+              const SizedBox(height: 10),
+              Text(
+                'Choose Language',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+              const SizedBox(height: 10),
+              Text(
+                'Select your preferred language from the options below.',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      fontWeight: FontWeight.w400,
+                    ),
+              ),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: 20),
+              _buildLanguageButton(context, 'English', Colors.blue,
+                  borderForTop: true),
+              _buildLanguageButton(context, 'తెలుగు', Colors.deepPurple),
+              _buildLanguageButton(context, 'ಕನ್ನಡ', Colors.teal,
+                  borderForBottom: false),
+              const SizedBox(height: 10),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildLanguageButton(
+      BuildContext context, String language, Color color,
+      {bool? borderForTop = false, bool? borderForBottom = true}) {
+    return GestureDetector(
+      onTap: () {
+        if (language == 'English') {
+          changeLocaleLanguage(context, AppLocal.englishLocale);
+        } else if (language == 'తెలుగు') {
+          changeLocaleLanguage(context, AppLocal.teluguLocale);
+        } else if (language == 'ಕನ್ನಡ') {
+          changeLocaleLanguage(context, AppLocal.kannadaLocale);
+        }
+      },
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          border: Border(
+            top: borderForTop == true
+                ? const BorderSide(color: Colors.grey, width: 1)
+                : BorderSide.none,
+            bottom: borderForBottom == true
+                ? const BorderSide(color: Colors.grey, width: 1)
+                : BorderSide.none,
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              flex: 3,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  CircleAvatar(
+                      backgroundColor: Colors.black,
+                      child: SvgPicture.asset(
+                        getIcon(language),
+                        fit: BoxFit.contain,
+                        color: language == 'ಕನ್ನಡ' ? Colors.white : null,
+                      )),
+                ],
+              ),
+            ),
+            const SizedBox(width: 20),
+            Expanded(
+              flex: 4,
+              child: Text(
+                language,
+                style: const TextStyle(fontSize: 16, color: Colors.black),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  String getIcon(String language) {
+    switch (language) {
+      case 'English':
+        return Assets.images.iconEnglish.path;
+      case 'తెలుగు':
+        return Assets.images.iconTelugu.path;
+      case 'ಕನ್ನಡ':
+        return Assets.images.languageKannada.path;
+      default:
+        return Assets.images.languageExchange.path;
+    }
   }
 
   void changeLocaleLanguage(BuildContext context, Locale locale) {
-    context.setLocale(locale); // Change the locale
-    Navigator.of(context).pop(); // Close the popup
-    // Close side menu only if open
+    Navigator.of(context).pop();
+    context.setLocale(locale);
     if (Navigator.of(context).canPop()) {
-      Navigator.of(context)
-          .pop(); // Close side menu or other dialog if applicable
+      Navigator.of(context).pop();
     }
   }
 
@@ -732,5 +885,95 @@ class _MainScreenPageState extends State<MainScreen> {
         SnackBar(content: Text('SecurityException: $e')),
       );
     }
+  }
+
+  void showLocalizationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          backgroundColor: Theme.of(context).colorScheme.surface,
+          child: localizationDialog(context),
+        );
+      },
+    );
+  }
+
+  Widget localizationDialog(BuildContext context) {
+    return Container(
+      width: 20,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surfaceContainerLow,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                Text(
+                  'Choose Language',
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  'Select your preferred language from the options below.',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                        fontWeight: FontWeight.w400,
+                      ),
+                ),
+              ],
+            ),
+          ),
+          localeItem(
+            'English',
+            onTap: () {},
+          ),
+          localeItem(
+            'తెలుగు',
+            onTap: () {},
+          ),
+          const Divider(
+            color: Colors.grey,
+          ),
+          GestureDetector(
+            onTap: () {},
+            child: Container(
+              color: Theme.of(context).colorScheme.surfaceContainerLow,
+              margin: const EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.all(12),
+              alignment: Alignment.center,
+              child: const Text('हिंदी'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget localeItem(String title, {void Function()? onTap}) {
+    return Column(
+      children: [
+        const Divider(
+          color: Colors.grey,
+        ),
+        GestureDetector(
+          onTap: onTap,
+          child: Container(
+            color: Theme.of(context).colorScheme.surfaceContainerLow,
+            padding: const EdgeInsets.all(12),
+            alignment: Alignment.center,
+            child: Text(title),
+          ),
+        ),
+      ],
+    );
   }
 }

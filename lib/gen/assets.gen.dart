@@ -15,6 +15,14 @@ import 'package:vector_graphics/vector_graphics.dart' as _vg;
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/Icon_english.svg
+  SvgGenImage get iconEnglish =>
+      const SvgGenImage('assets/images/Icon_english.svg');
+
+  /// File path: assets/images/Icon_telugu.svg
+  SvgGenImage get iconTelugu =>
+      const SvgGenImage('assets/images/Icon_telugu.svg');
+
   /// File path: assets/images/appbg.png
   AssetGenImage get appbg => const AssetGenImage('assets/images/appbg.png');
 
@@ -204,6 +212,14 @@ class $AssetsImagesGen {
   AssetGenImage get landingpagebackground =>
       const AssetGenImage('assets/images/landingpagebackground.png');
 
+  /// File path: assets/images/language_exchange.svg
+  SvgGenImage get languageExchange =>
+      const SvgGenImage('assets/images/language_exchange.svg');
+
+  /// File path: assets/images/language_kannada.svg
+  SvgGenImage get languageKannada =>
+      const SvgGenImage('assets/images/language_kannada.svg');
+
   /// File path: assets/images/loan.png
   AssetGenImage get loan => const AssetGenImage('assets/images/loan.png');
 
@@ -290,6 +306,8 @@ class $AssetsImagesGen {
 
   /// List of all assets
   List<dynamic> get values => [
+        iconEnglish,
+        iconTelugu,
         appbg,
         arrowDown,
         bill,
@@ -342,6 +360,8 @@ class $AssetsImagesGen {
         labour,
         labourAsset,
         landingpagebackground,
+        languageExchange,
+        languageKannada,
         loan,
         loanAsset,
         logoFinal,
