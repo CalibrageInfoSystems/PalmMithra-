@@ -55,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen>
     );
     _animationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-    navigateToNextScreen();
+        navigateToNextScreen();
       }
     });
     _animationController.forward();
@@ -141,13 +141,17 @@ class _SplashScreenState extends State<SplashScreen>
                     );
                   },
                 ),
-             Positioned(
+                const TypewriterText(
+                  text: "",
+                  color: Color(0xFFCE0E2D),
+                ),
+                /* Positioned(
                   bottom: 100, // Adjust as needed for spacing
                   child: const TypewriterText(
                     text: "",
                     color: Color(0xFFCE0E2D),
                   ),
-                ),
+                ), */
               ],
             ),
           ),

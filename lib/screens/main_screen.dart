@@ -524,32 +524,39 @@ class _MainScreenPageState extends State<MainScreen> {
             borderRadius: BorderRadius.circular(20),
           ),
           title: Center(
-            child: const Text(
-              'Confirmation',
+            child: Text(
+              tr(LocaleKeys.confirmation),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
             ),
           ),
-          content: const Text(
-            'Are you sure you want to log out?',
+          content: Text(
+            tr(LocaleKeys.alert_logout),
             style: TextStyle(fontSize: 16),
           ),
           actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              style: TextButton.styleFrom(
-                foregroundColor: Colors.grey[700],
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: CommonStyles.primaryTextColor,
               ),
-              child: const Text('Cancel'),
+              child: Text(tr(LocaleKeys.cancel_capitalized),
+                  style: TextStyle(color: Colors.white)),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pop();
+                onConfirmLogout(context);
+              },
               style: ElevatedButton.styleFrom(
-                backgroundColor: CommonStyles.themeTextColor,
+                backgroundColor: CommonStyles.primaryTextColor,
               ),
-              child: const Text('OK', style: TextStyle(color: Colors.white)),
+              child: Text(tr(LocaleKeys.ok),
+                  style: TextStyle(color: Colors.white)),
             ),
           ],
         );
@@ -787,7 +794,6 @@ class _MainScreenPageState extends State<MainScreen> {
           ),
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
               flex: 3,
@@ -795,12 +801,13 @@ class _MainScreenPageState extends State<MainScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   CircleAvatar(
-                      backgroundColor: Colors.black,
-                      child: SvgPicture.asset(
-                        getIcon(language),
-                        fit: BoxFit.contain,
-                        color: language == 'ಕನ್ನಡ' ? Colors.white : null,
-                      )),
+                    backgroundColor: Colors.black,
+                    child: SvgPicture.asset(
+                      getIcon(language),
+                      fit: BoxFit.contain,
+                      color: language == 'ಕನ್ನಡ' ? Colors.white : null,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -811,7 +818,7 @@ class _MainScreenPageState extends State<MainScreen> {
                 language,
                 style: const TextStyle(fontSize: 16, color: Colors.black),
               ),
-            )
+            ),
           ],
         ),
       ),

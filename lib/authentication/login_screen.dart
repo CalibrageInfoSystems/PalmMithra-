@@ -102,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           const SizedBox(height: 10),
-                          Row(
+                          const Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
@@ -173,12 +173,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           const SizedBox(height: 20),
-                          Row(
+                          const Row(
                             children: [
-                              const Expanded(
+                              Expanded(
                                   child: Divider(
                                       color: Colors.grey, thickness: 1)),
-                              const Padding(
+                              Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 10),
                                 child: Text(
                                   'OR',
@@ -186,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       color: Colors.grey, fontSize: 16),
                                 ),
                               ),
-                              const Expanded(
+                              Expanded(
                                   child: Divider(
                                       color: Colors.grey, thickness: 1)),
                             ],

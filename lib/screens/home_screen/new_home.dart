@@ -188,7 +188,7 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
                     children: [
                       header(isTablet),
                       const SizedBox(height: 12),
-             /*         SizedBox(
+                      /*         SizedBox(
                         height: isTablet ? 50 : 40,
                         child: marqueeText(),
                       ),*/
@@ -613,53 +613,51 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
   }) {
     final isTablet = size.width > 600;
 
-    return Expanded(
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 3),
-          // padding: padding ??
-          //     EdgeInsets.symmetric(vertical: isTablet ? 20 : 16, horizontal: 5),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(color: CommonStyles.homeBorderColor),
-            color: Colors.white,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: EdgeInsets.all(isTablet ? 18 : 14),
-                decoration: const BoxDecoration(
-                  color: CommonStyles.homeBgColor,
-                  shape: BoxShape.circle,
-                ),
-                child: SvgPicture.asset(
-                  assetName ?? '',
-                  width: 25,
-                  height: 25,
-                  fit: BoxFit.contain,
-                  color: CommonStyles.themeTextColor,
-                ),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 3),
+        // padding: padding ??
+        //     EdgeInsets.symmetric(vertical: isTablet ? 20 : 16, horizontal: 5),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: CommonStyles.homeBorderColor),
+          color: Colors.white,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: EdgeInsets.all(isTablet ? 18 : 14),
+              decoration: const BoxDecoration(
+                color: CommonStyles.homeBgColor,
+                shape: BoxShape.circle,
+              ),
+              child: SvgPicture.asset(
+                assetName ?? '',
+                width: 25,
+                height: 25,
+                fit: BoxFit.contain,
+                color: CommonStyles.themeTextColor,
+              ),
 
-                /*  Icon(
-                  getIconForTitle(title),
-                  color: CommonStyles.themeTextColor,
-                  size: isTablet ? 40 : 30,
-                ), */
+              /*  Icon(
+                getIconForTitle(title),
+                color: CommonStyles.themeTextColor,
+                size: isTablet ? 40 : 30,
+              ), */
+            ),
+            const SizedBox(height: 5),
+            Text(
+              title ?? '',
+              textAlign: TextAlign.center,
+              style: CommonStyles.txStyF14CbFF6.copyWith(
+                fontSize: isTablet ? 16 : 14,
               ),
-              const SizedBox(height: 5),
-              Text(
-                title ?? '',
-                textAlign: TextAlign.center,
-                style: CommonStyles.txStyF14CbFF6.copyWith(
-                  fontSize: isTablet ? 16 : 14,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
-          ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
         ),
       ),
     );
@@ -745,10 +743,11 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
         } else if (snapshot.hasError) {
           return const SizedBox();
         }
-        return Skeletonizer(
+        /* return Skeletonizer(
           enabled: true,
           child: bannerTemplate(size, []),
-        );
+        ); */
+        return const SizedBox();
       },
     );
   }
@@ -890,20 +889,23 @@ class _NewHomeScreenState extends State<NewHomeScreen> {
       permission = await Geolocator.requestPermission();
     }
 
-    if (permission == LocationPermission.deniedForever || permission == LocationPermission.denied) {
+    if (permission == LocationPermission.deniedForever ||
+        permission == LocationPermission.denied) {
       return;
     }
 
     // Get location
     final position = await Geolocator.getCurrentPosition();
-    final placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
+    final placemarks =
+        await placemarkFromCoordinates(position.latitude, position.longitude);
     final city = placemarks.first.locality ?? "your location";
 
     // Fetch weather
-    const apiKey = "4755e93e3d4db57175e81d1e1d10d111"; // Replace with your OpenWeatherMap API key
+    const apiKey =
+        "4755e93e3d4db57175e81d1e1d10d111"; // Replace with your OpenWeatherMap API key
     final url =
         'https://api.openweathermap.org/data/2.5/weather?lat=${position.latitude}&lon=${position.longitude}&units=metric&appid=$apiKey';
-print('weather url===$url');
+    print('weather url===$url');
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
       final data = json.decode(response.body);

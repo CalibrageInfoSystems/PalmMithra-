@@ -79,7 +79,7 @@ class _LoginOtpScreenState extends State<LoginOtpScreen> {
                       child: Image.asset(
                         Assets.images.palm360Logo.path,
                         // 'assets/images/palm360_logo.png',
-                
+
                         fit: BoxFit.contain,
                       ),
                     ),
@@ -115,7 +115,7 @@ class _LoginOtpScreenState extends State<LoginOtpScreen> {
                       ),
                     ),
                     const SizedBox(height: 30),
-                
+
                     /*  Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: PinCodeTextField(
@@ -321,7 +321,7 @@ class _LoginOtpScreenState extends State<LoginOtpScreen> {
             shadowColor: Colors.transparent,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16.0),
-            ),
+            ), 
           ),
           child: Text(
             language,
